@@ -16,12 +16,14 @@ public class VendingMachineDemo {
 
 
         // Start a transaction
-//        vendingMachine.insertNote(Note.FIVE);
-        vendingMachine.insertCoin(Coin.NICKEL);
+        vendingMachine.insertNote(Note.FIVE);
+        for (int i = 0; i < 20; i++) {
+            vendingMachine.insertCoin(Coin.QUARTER);
 
+        }
 
         //selecting product
-        vendingMachine.selectProduct(chips);
+        vendingMachine.selectProduct(icecream);
 
         vendingMachine.dispenseProduct();
 
