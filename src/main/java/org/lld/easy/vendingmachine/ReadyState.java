@@ -15,14 +15,10 @@ package org.lld.easy.vendingmachine;
     @Override
     public void selectProduct(VendingMachine vendingMachine, Product product) {
         if (vendingMachine.getInventory().isProductAvailable(product)){
-//            vendingMachine.setSelectedProduct(product);
-//            vendingMachine.setState(new DispenseState());
-            if (vendingMachine.getTotalPayment() >= product.getPrice()) {
-                vendingMachine.setSelectedProduct(product);
-                vendingMachine.setState(new DispenseState());
-            } else {
-                System.out.println("Insufficient funds. Please insert more coins or notes.");
-            }
+            vendingMachine.setSelectedProduct(product);
+            vendingMachine.setState(new DispenseState());
+
+
         }else {
             System.out.println("Out of Stock");
         }

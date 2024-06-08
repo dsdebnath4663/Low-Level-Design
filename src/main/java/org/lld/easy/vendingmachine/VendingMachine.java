@@ -65,7 +65,7 @@ public class VendingMachine {
 
     public void dispenseProduct() {
 //        state.dispenseProduct(this);
-        // Checking if the selected product is affordable before dispensing
+//         Checking if the selected product is affordable before dispensing
         if (selectedProduct != null && totalPayment >= selectedProduct.getPrice()) {
             state.dispenseProduct(this);
         } else {
