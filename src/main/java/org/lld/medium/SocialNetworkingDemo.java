@@ -19,11 +19,10 @@ public class SocialNetworkingDemo {
         service.updateUserProfile("2", "profile_pic_Debanth.jpg", "Aspiring java developer");
 
 
-
         service.sendFriendRequest(alice.getId(), debnath.getId());//TODO
 
         service.acceptFriendRequest(alice.getId(), debnath.getId());//TODO
-
+        Post alicePost = service.createPost(alice.getId(), "this is the good network ");
 
 
     }

@@ -8,10 +8,14 @@ public class SocialNetworkingService {
     private static SocialNetworkingService instance;
     private final Map<String, User> userCollection;
     private final Map<String, Notification> notificationMap;
+    private final Map<String, Post> postMap;
+
+
 
     SocialNetworkingService() {
         userCollection = new ConcurrentHashMap<>();
         notificationMap = new ConcurrentHashMap<>();
+        postMap = new ConcurrentHashMap<>();
     }
 
     public synchronized static SocialNetworkingService getInstance() {
@@ -68,7 +72,7 @@ public class SocialNetworkingService {
         if (user != null && friend != null) {
 
             // Assuming a simple notification for friend request
-            Notification notification = new Notification("1", userId, NotificationType.FRIEND_REQUEST, user.getName() + " send a friend request", String.valueOf(System.currentTimeMillis()));
+            Notification notification = new Notification(generateId(), userId, NotificationType.FRIEND_REQUEST, user.getName() + " send a friend request", String.valueOf(System.currentTimeMillis()));
             notificationMap.put(notification.getId(), notification);
             System.out.println(user.getName() + " send a friend request");
         }
@@ -84,10 +88,31 @@ public class SocialNetworkingService {
             friend.addFriend(user);
 
             // Notify friend request accepted
-            Notification notification = new Notification("1", friendId, NotificationType.FRIEND_REQUEST_ACCEPTED, friend.getName() + " accepted  your friend request", String.valueOf(System.currentTimeMillis()));
+            Notification notification = new Notification(generateId(), friendId, NotificationType.FRIEND_REQUEST_ACCEPTED, friend.getName() + " accepted  your friend request", String.valueOf(System.currentTimeMillis()));
             notificationMap.put(notification.getId(), notification);
             System.out.println(friend.getName() + " accepted your friend request");
         }
+
     }
+
+    private String generateId() {
+        return String.valueOf(System.currentTimeMillis());
+    }
+
+    public Post createPost(String userId, String content){
+        Post post = new Post();
+        User user = userCollection.get(userId);
+
+        if (userId != null && content != null) {
+            post = new Post(generateId(),userId,content,System.currentTimeMillis());
+            postMap.put(post.getId(), post);
+            user.addPost(post);
+
+            System.out.println(user.getName() + " created a post ");
+
+        }
+        return post;
+    }
+
 
 }

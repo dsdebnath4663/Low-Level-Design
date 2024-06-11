@@ -12,14 +12,15 @@ public class User {
     private String bio;
     //TODO friends
     private List<User> friends;
+    private List<Post> posts;
 
     public User(String id, String name, String email, String password) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
-        this.friends= new CopyOnWriteArrayList<>();
-
+        this.friends = new CopyOnWriteArrayList<>();
+        this.posts = new CopyOnWriteArrayList<>();
 
     }
 
@@ -101,4 +102,7 @@ public class User {
 
     }
 
+    public void addPost(Post post) {
+        posts.add(post);
+    }
 }
