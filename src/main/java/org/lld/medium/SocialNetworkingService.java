@@ -1,7 +1,9 @@
 package org.lld.medium;
 
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class SocialNetworkingService {
 
@@ -9,7 +11,6 @@ public class SocialNetworkingService {
     private final Map<String, User> userCollection;
     private final Map<String, Notification> notificationMap;
     private final Map<String, Post> postMap;
-
 
 
     SocialNetworkingService() {
@@ -99,12 +100,12 @@ public class SocialNetworkingService {
         return String.valueOf(System.currentTimeMillis());
     }
 
-    public Post createPost(String userId, String content){
+    public Post createPost(String userId, String content) {
         Post post = new Post();
         User user = userCollection.get(userId);
 
         if (userId != null && content != null) {
-            post = new Post(generateId(),userId,content,System.currentTimeMillis());
+            post = new Post(generateId(), userId, content, System.currentTimeMillis());
             postMap.put(post.getId(), post);
             user.addPost(post);
 
@@ -114,5 +115,28 @@ public class SocialNetworkingService {
         return post;
     }
 
+    public List<Post> getNewsfeed( String userId) {
+        User user = userCollection.get(userId);
+        List<Post> newsFeed = new CopyOnWriteArrayList<>();
+        if(user!=null){
+      //      System.out.println("Friends Object's are: "+user.getFriends());
+
+            for (User friend: user.getFriends()) {
+         //       System.out.println("Friends name's are : "+friend.getName());
+       //         System.out.println("Friends post's are : "+friend.getPosts());
+
+                List<Post>  friendPost = friend.getPosts();
+                newsFeed.addAll(friendPost);
+            }
+
+         //   System.out.println("user.getPosts():"+user.getPosts());
+            List<Post>  userPost = user.getPosts();
+            newsFeed.addAll(userPost);
+            newsFeed.sort((p1, p2) -> Long.compare(p2.getTimestamp(), p1.getTimestamp()));
+        }
+        System.out.println(newsFeed);
+        return newsFeed;
+
+    }
 
 }

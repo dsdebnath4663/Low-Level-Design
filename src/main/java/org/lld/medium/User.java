@@ -105,4 +105,12 @@ public class User {
     public void addPost(Post post) {
         posts.add(post);
     }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
+    }
 }
