@@ -49,6 +49,9 @@ public class SocialNetworkingDemo {
 
         service.commentOnPost(rocky.getId(),rockyPost.getId(),"This is the good picture" );
         service.commentOnPost(debnath.getId(),rockyPost.getId(),"WOW beautiful pic");
+
+        service.getNotifications(debnath.getId());
+        service.getNotifications(alice.getId());
     }
 
 }

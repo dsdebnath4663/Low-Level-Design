@@ -183,4 +183,19 @@ public class SocialNetworkingService {
             System.out.println(user.getName()+" commented: "+content+" on post: "+post.getContent());
         }
     }
+    //getNotifications
+    public List<Notification> getNotifications( String userId) {
+        User user = userCollection.get(userId);
+        List<Notification> userNotifictions = new CopyOnWriteArrayList<>();
+        if(user!=null){
+            for (Notification notification: notificationMap.values()) {
+
+                userNotifictions.add(notification);
+                System.out.println("Notification :"+notification.toString());
+            }
+        }
+
+        return userNotifictions;
+
+    }
 }
