@@ -43,6 +43,12 @@ public class SocialNetworkingDemo {
         for (Post post:getNewsfeedForRocky) {
             System.out.println("User: "+post.getUserId()+" Content: "+post.getContent());
         }
+
+        // Rocky like alice's post
+        service.likePost(rocky.getId(),alicePost.getId());
+
+        service.commentOnPost(rocky.getId(),rockyPost.getId(),"This is the good picture" );
+        service.commentOnPost(debnath.getId(),rockyPost.getId(),"WOW beautiful pic");
     }
 
 }

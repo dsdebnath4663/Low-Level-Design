@@ -89,7 +89,10 @@ public class SocialNetworkingService {
             friend.addFriend(user);
 
             // Notify friend request accepted
-            Notification notification = new Notification(generateId(), friendId, NotificationType.FRIEND_REQUEST_ACCEPTED, friend.getName() + " accepted  your friend request", String.valueOf(System.currentTimeMillis()));
+            Notification notification = new Notification(generateId(),
+                    friendId,
+                    NotificationType.FRIEND_REQUEST_ACCEPTED,
+                    friend.getName() + " accepted  your friend request", String.valueOf(System.currentTimeMillis()));
             notificationMap.put(notification.getId(), notification);
             System.out.println(friend.getName() + " accepted your friend request");
         }
@@ -139,4 +142,45 @@ public class SocialNetworkingService {
 
     }
 
+    public  void likePost(String userId,String postId){
+        Post post = postMap.get(postId);
+        if(post !=null ){
+            User user= userCollection.get(userId);
+            post.addLikes(user);
+
+
+            Notification qnotification = new Notification(generateId(),
+                    userId,
+                    NotificationType.LIKE,
+                    user.getName() + " Liked your  post ",
+                    String.valueOf(System.currentTimeMillis()));
+
+            System.out.println(user.getName()+"liked on ******"+post.getContent()+"********");
+
+        }
+
+
+    }
+    public void commentOnPost (String userId, String postId, String content){
+        Post post = postMap.get(postId);
+        if (post!= null){
+            Comment comment = new Comment(generateId(),
+                    userId,
+                    postId,
+                    content,
+                    String.valueOf(System.currentTimeMillis()));
+            post.addComment(comment);
+
+//Notify that user has commented on a post
+            User user = userCollection.get(userId);
+            Notification notification = new Notification(generateId(),
+                    userId,
+                    NotificationType.COMMENT,
+                    user.getName()+" Commented your post",
+                    String.valueOf(System.currentTimeMillis()));
+            notificationMap.put(notification.getId(),notification);
+
+            System.out.println(user.getName()+" commented: "+content+" on post: "+post.getContent());
+        }
+    }
 }

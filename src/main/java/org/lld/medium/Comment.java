@@ -6,9 +6,9 @@ public class Comment {
     private String userId;
     private String postId;
     private String content;
-    private long timestamp;
+    private String timestamp;
 
-    public Comment(String id, String userId, String postId, String content, long timestamp) {
+    public Comment(String id, String userId, String postId, String content, String timestamp) {
         this.id = id;
         this.userId = userId;
         this.postId = postId;
@@ -48,11 +48,11 @@ public class Comment {
         this.content = content;
     }
 
-    public long getTimestamp() {
+    public String getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(long timestamp) {
+    public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
     }
 

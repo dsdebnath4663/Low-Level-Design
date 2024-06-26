@@ -1,5 +1,6 @@
 package org.lld.medium;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Post {
@@ -9,8 +10,8 @@ public class Post {
     private List<String> imageUrls;
     private List<String> videoUrls;
     private long timestamp;
-    private List<User> likes;
-    private List<Comment> comments;
+    private List<User> likes = new ArrayList<>();
+    private List<Comment> comments = new ArrayList<>();
 
     public Post(String id, String userId, String content, long timestamp) {
         this.id = id;
